@@ -1,0 +1,56 @@
+buildscript {
+    ext {
+        springBootVersion = '2.6.4'
+    }
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public/'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+plugins {
+    id 'java'
+}
+
+apply plugin: 'java'
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    maven {
+        url 'https://maven.aliyun.com/nexus/content/groups/public/'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    compileOnly ('org.springframework.boot:spring-boot-starter-web:2.6.4') {
+        exclude (group: 'ch.qos.logback', module: 'logback-classic')
+    }
+    implementation 'org.apache.dubbo:dubbo-spring-boot-starter:3.0.6'
+    implementation 'org.apache.dubbo:dubbo-dependencies-zookeeper:3.0.6'
+    implementation 'com.graphql-java:graphql-java:17.3'
+    implementation ('com.graphql-java:graphql-java-spring-boot-starter-webmvc:2.0') {
+        exclude (group: 'org.springframework', module: 'spring-context')
+        exclude (group: 'org.springframework', module: 'spring-webmvc')
+        exclude (group: 'org.springframework.boot', module: 'spring-boot-autoconfigure')
+    }
+    implementation 'com.google.guava:guava:26.0-jre'
+    implementation ('com.graphql-java:graphiql-spring-boot-starter:5.0.2') {
+        exclude (group: 'org.springframework')
+        exclude (group: 'org.springframework.boot')
+    }
+}
+
+test {
+    useJUnitPlatform()
+}

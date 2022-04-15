@@ -1,0 +1,16 @@
+type Query {
+    getUserList: [UserInfo]!
+}
+
+type UserInfo {
+    userId: ID
+    userName: String
+    userAge: Int
+    company: CompanyInfo
+}
+
+type CompanyInfo {
+    companyId: ID
+    companyCode: String
+    companyName: String
+}
